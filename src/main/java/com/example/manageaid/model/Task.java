@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue
@@ -25,7 +26,9 @@ public class Task {
 
     private Boolean done;
 
-    public Long getId() {
+    private Long userId;
+
+      public Long getId() {
         return id;
     }
 
@@ -63,5 +66,13 @@ public class Task {
 
     public void setDone(Boolean done) {
         this.done = done;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

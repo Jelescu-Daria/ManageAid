@@ -9,22 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
-public class TestController {
-  @GetMapping("/all")
-  public String allAccess() {
-    return "Public Content.";
-  }
-
+public class UserRoleController {
   @GetMapping("/customer")
   @PreAuthorize("hasRole('ROLE_CUSTOMER')")
-  public String userAccess() {
-    return "User Content.";
+  public String customerAccess() {
+    return "Customer Content.";
   }
 
   @GetMapping("/employee")
   @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
-  public String moderatorAccess() {
-    return "Moderator Board.";
+  public String employeeAccess() {
+    return "Employee Board.";
   }
 
   @GetMapping("/admin")

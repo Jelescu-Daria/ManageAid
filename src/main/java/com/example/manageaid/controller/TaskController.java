@@ -10,42 +10,43 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class TaskController {
 
     @Autowired
     private TaskRepository taskRepository;
 
-    @PostMapping("/tasks")
-    Task newUser(@RequestBody Task newTask) {
-        return taskRepository.save(newTask);
+    @GetMapping("/{userId}/tasks")
+    List<Task> getAllTasks(@PathVariable Long userId) {
+        return taskRepository.getTasksForUser(userId);
     }
 
-    @GetMapping("/tasks")
-    List<Task> getAllTasks() {
-        return taskRepository.findAll();
-    }
-
-    @GetMapping("/tasks/{id}")
-    Task getTaskById(@PathVariable Long id) {
+    @GetMapping("/{userId}/tasks/{id}")
+    Task getTaskById(@PathVariable Long id, @PathVariable String userId) {
         return taskRepository.findById(id)
                 .orElseThrow(()->new EntityNotFoundException(id));
     }
 
-    @PutMapping("/tasks/{id}")
+    @PostMapping("/{userId}/tasks")
+    Task addTask(@RequestBody Task newTask) {
+        return taskRepository.save(newTask);
+    }
+
+    @PutMapping("/{userId}/tasks/{id}")
     Task updateTask(@RequestBody Task newTask, @PathVariable Long id) {
         return taskRepository.findById(id)
                 .map(entity -> {
                     entity.setName(newTask.getName());
-                    entity.setDetails(newTask.getDeadline());
+                    entity.setDetails(newTask.getDetails());
                     entity.setDeadline(newTask.getDeadline());
                     entity.setDone(newTask.getDone());
+                    entity.setUserId(newTask.getUserId());
                     return taskRepository.save(entity);
                 }).orElseThrow(()-> new EntityNotFoundException(id));
     }
 
-    @DeleteMapping("/tasks/{id}")
-    String deleteUser(@PathVariable Long id) {
+    @DeleteMapping("/{userId}/tasks/{id}")
+    String deleteTask(@PathVariable Long id, @PathVariable String userId) {
         if(!taskRepository.existsById(id)) {
             throw new EntityNotFoundException(id);
         }
