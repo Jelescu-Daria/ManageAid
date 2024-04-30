@@ -11,7 +11,11 @@ import java.util.Set;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    @Query(value = "SELECT t.* FROM tasks t WHERE user_id = ?1", nativeQuery = true)
-    List<Task> getTasksForUser(Long userId);
+    @Query(value = "SELECT t.* FROM tasks t WHERE user_id = ?1 and done = ?2", nativeQuery = true)
+    List<Task> getTasksForUser(Long userId, Boolean done);
+
+
+
+
 
 }

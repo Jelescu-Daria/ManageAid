@@ -15,10 +15,10 @@ public class Task {
 
 
     @NotBlank
-    @Size(max = 20)
+    @Size(max = 100)
     private String name;
 
-    @Size(max = 50)
+    @Size(max = 200)
     private String details;
 
     @DateTimeFormat

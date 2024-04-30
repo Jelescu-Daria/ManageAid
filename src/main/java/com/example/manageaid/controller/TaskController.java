@@ -17,8 +17,8 @@ public class TaskController {
     private TaskRepository taskRepository;
 
     @GetMapping("/{userId}/tasks")
-    List<Task> getAllTasks(@PathVariable Long userId) {
-        return taskRepository.getTasksForUser(userId);
+    List<Task> getAllTasksFilteredByDone(@PathVariable Long userId, @RequestParam Boolean done) {
+        return taskRepository.getTasksForUser(userId, done);
     }
 
     @GetMapping("/{userId}/tasks/{id}")
@@ -53,4 +53,5 @@ public class TaskController {
         taskRepository.deleteById(id);
         return "Entity with id " + id + " has been successfully deleted.";
     }
+
 }
