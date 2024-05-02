@@ -34,6 +34,7 @@ public class User {
     @Size(max = 120)
     private String password;
 
+    @NotBlank
     @Size(max = 30)
     private String name;
 

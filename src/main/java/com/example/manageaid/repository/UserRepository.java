@@ -26,4 +26,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
           "WHERE r.name = ?1", nativeQuery = true)
   List<User> getUsersByRole(String role);
 
+
 }
