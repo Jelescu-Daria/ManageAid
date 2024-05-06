@@ -48,6 +48,8 @@ public class UserController {
               entity.setPhoneNumber(newUser.getPhoneNumber());
               entity.setAddress(newUser.getAddress());
               entity.setDateOfBirth(newUser.getDateOfBirth());
+              entity.setRoles(newUser.getRoles());
+              entity.setModules(newUser.getModules());
               return userRepository.save(entity);
             }).orElseThrow(()-> new EntityNotFoundException(id));
   }
