@@ -10,29 +10,29 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api")
 public class TaskController {
 
     @Autowired
     private TaskRepository taskRepository;
 
-    @GetMapping("/{userId}/tasks")
+    @GetMapping("/users/{userId}/tasks")
     List<Task> getAllTasksFilteredByDone(@PathVariable Long userId, @RequestParam Boolean done) {
         return taskRepository.getTasksForUser(userId, done);
     }
 
-    @GetMapping("/{userId}/tasks/{id}")
+    @GetMapping("/users/{userId}/tasks/{id}")
     Task getTaskById(@PathVariable Long id, @PathVariable String userId) {
         return taskRepository.findById(id)
                 .orElseThrow(()->new EntityNotFoundException(id));
     }
 
-    @PostMapping("/{userId}/tasks")
+    @PostMapping("/users/{userId}/tasks")
     Task addTask(@RequestBody Task newTask) {
         return taskRepository.save(newTask);
     }
 
-    @PutMapping("/{userId}/tasks/{id}")
+    @PutMapping("/users/{userId}/tasks/{id}")
     Task updateTask(@RequestBody Task newTask, @PathVariable Long id) {
         return taskRepository.findById(id)
                 .map(entity -> {
@@ -45,7 +45,7 @@ public class TaskController {
                 }).orElseThrow(()-> new EntityNotFoundException(id));
     }
 
-    @DeleteMapping("/{userId}/tasks/{id}")
+    @DeleteMapping("/users/{userId}/tasks/{id}")
     String deleteTask(@PathVariable Long id, @PathVariable String userId) {
         if(!taskRepository.existsById(id)) {
             throw new EntityNotFoundException(id);
