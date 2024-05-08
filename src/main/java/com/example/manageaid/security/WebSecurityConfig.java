@@ -4,6 +4,7 @@ import com.example.manageaid.security.jwt.AuthEntryPointJwt;
 import com.example.manageaid.security.jwt.AuthTokenFilter;
 import com.example.manageaid.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +17,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.context.annotation.Scope;
+
+// DP2 SINGLETON
 
 @Configuration
 @EnableMethodSecurity
@@ -27,12 +31,14 @@ public class WebSecurityConfig {
   private AuthEntryPointJwt unauthorizedHandler;
 
   @Bean
+  @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
   public AuthTokenFilter authenticationJwtTokenFilter() {
     return new AuthTokenFilter();
   }
 
   
   @Bean
+  @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
   public DaoAuthenticationProvider authenticationProvider() {
       DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
        
@@ -43,17 +49,20 @@ public class WebSecurityConfig {
   }
 
   @Bean
+  @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
   public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
     return authConfig.getAuthenticationManager();
   }
 
   @Bean
+  @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
 
   @Bean
+  @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
