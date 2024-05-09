@@ -29,6 +29,7 @@ public class TaskController {
 
     @PostMapping("/users/{userId}/tasks")
     Task addTask(@RequestBody Task newTask) {
+
         return taskRepository.save(newTask);
     }
 
@@ -40,7 +41,7 @@ public class TaskController {
                     entity.setDetails(newTask.getDetails());
                     entity.setDeadline(newTask.getDeadline());
                     entity.setDone(newTask.getDone());
-                    entity.setUserId(newTask.getUserId());
+                    entity.setUser(newTask.getUser());
                     return taskRepository.save(entity);
                 }).orElseThrow(()-> new EntityNotFoundException(id));
     }

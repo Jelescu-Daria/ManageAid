@@ -45,7 +45,7 @@ public class PaymentController {
                     entity.setDetails(newPayment.getDetails());
                     entity.setDateMade(newPayment.getDateMade());
                     entity.setPayerInfo(newPayment.getPayerInfo());
-                    entity.setUserId(newPayment.getUserId());
+                    entity.setUser(newPayment.getUser());
                     return paymentRepository.save(entity);
                 }).orElseThrow(() -> new EntityNotFoundException(id));
     }
