@@ -24,7 +24,6 @@ public class Payment {
     @Size(max = 200)
     private String details;
 
-    @NotNull
     @DateTimeFormat
     private Date dateMade;
 
