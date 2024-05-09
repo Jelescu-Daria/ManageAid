@@ -37,19 +37,6 @@ public class PaymentController {
         return paymentRepository.save(newPayment);
     }
 
-    @PutMapping("/payments/{id}")
-    Payment updatePayment(@RequestBody Payment newPayment, @PathVariable Long id) {
-        return paymentRepository.findById(id)
-                .map(entity -> {
-                    entity.setSum(newPayment.getSum());
-                    entity.setDetails(newPayment.getDetails());
-                    entity.setDateMade(newPayment.getDateMade());
-                    entity.setPayerInfo(newPayment.getPayerInfo());
-                    entity.setUser(newPayment.getUser());
-                    return paymentRepository.save(entity);
-                }).orElseThrow(() -> new EntityNotFoundException(id));
-    }
-
     @DeleteMapping("/payments/{id}")
     String deletePayment(@PathVariable Long id) {
         if (!paymentRepository.existsById(id)) {
