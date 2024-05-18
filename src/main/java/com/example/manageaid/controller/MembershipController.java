@@ -3,9 +3,11 @@ package com.example.manageaid.controller;
 import com.example.manageaid.exception.EntityNotFoundException;
 import com.example.manageaid.model.Membership;
 import com.example.manageaid.repository.MembershipRepository;
+import com.example.manageaid.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -21,6 +23,16 @@ public class MembershipController {
         return membershipRepository.findAll();
     }
 
+    @GetMapping("/memberships/available")
+    List<Membership> getAvailableMemberships() {
+        return membershipRepository.getMembershipByEndDateGreaterThanEqual(DateUtils.removeTime(new Date()));
+        // available membership = end date after current date or end date is current date
+    }
+    @GetMapping("/memberships/expired")
+    List<Membership> getExpiredMemberships() {
+        return membershipRepository.getMembershipByEndDateLessThan(DateUtils.removeTime(new Date()));
+        // expired membership = end date before current date
+    }
 
     @GetMapping("/memberships/{id}")
     Membership getMembershipById(@PathVariable Long id) {
