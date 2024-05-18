@@ -2,6 +2,7 @@ package com.example.manageaid.controller;
 
 import com.example.manageaid.exception.EntityNotFoundException;
 import com.example.manageaid.model.Membership;
+import com.example.manageaid.model.Payment;
 import com.example.manageaid.repository.MembershipRepository;
 import com.example.manageaid.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,11 @@ public class MembershipController {
         }
         membershipRepository.deleteById(id);
         return "Entity with id " + id + " has been successfully deleted.";
+    }
+
+    @GetMapping("/users/{userId}/memberships")
+    List<Membership> getMembershipsForUser(@PathVariable Long userId) {
+        return membershipRepository.getMembershipsForUser(userId);
     }
 
 }

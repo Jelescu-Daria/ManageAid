@@ -2,6 +2,7 @@ package com.example.manageaid.controller;
 
 import com.example.manageaid.exception.EntityNotFoundException;
 import com.example.manageaid.model.Payment;
+import com.example.manageaid.model.Task;
 import com.example.manageaid.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class PaymentController {
 
     @GetMapping("/payments")
     List<Payment> getAllPayments() {
-        return paymentRepository.findAll();
+        return paymentRepository.findAllByOrderByDateMadeDesc();
     }
 
     @GetMapping("/payments/recent")
@@ -44,6 +45,11 @@ public class PaymentController {
         }
         paymentRepository.deleteById(id);
         return "Entity with id " + id + " has been successfully deleted.";
+    }
+
+    @GetMapping("/users/{userId}/payments")
+    List<Payment> getPaymentsForUser(@PathVariable Long userId) {
+        return paymentRepository.getPaymentsForUser(userId);
     }
 
 }
