@@ -2,7 +2,6 @@ package com.example.manageaid.controller;
 
 import com.example.manageaid.exception.EntityNotFoundException;
 import com.example.manageaid.model.Membership;
-import com.example.manageaid.model.Payment;
 import com.example.manageaid.repository.MembershipRepository;
 import com.example.manageaid.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
