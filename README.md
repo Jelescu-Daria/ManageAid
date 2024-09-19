@@ -14,3 +14,16 @@ do not want to use. The chosen modules appear in a dashboard, the main page of
 the application. The modules available for each type of user - admin, employee or
 customer - differ and cater to their specific needs.
 <br> <br>
+
+## Class diagram
+Data model classes <br>
+<img src="https://github.com/Jelescu-Daria/ManageAid-Backend/blob/master/ClassDiagram-Model.png/" width="600">
+
+<br>
+Authentication service classes <br>
+<img src="https://github.com/Jelescu-Daria/ManageAid-Backend/blob/master/ClassDiagram-Authentication.png" width="600">
+<br>
+
+## API Documentation
+A very short API Documentation is provided below, solely for the purpose of giving an idea about the functionalities, since no request/ response body is exemplified. <br>
+<img src="https://github.com/Jelescu-Daria/ManageAid-Backend/blob/master/API%20Short%20Documentation.png" width="500">
