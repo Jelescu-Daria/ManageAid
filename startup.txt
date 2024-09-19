@@ -1,2 +1,0 @@
-populate modules, roles, module_roles
-module user_id fk set manually to on delete cascade for all modules
